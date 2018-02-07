@@ -9,6 +9,7 @@ class Order(models.Model):
     coffee_bean = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    photo = models.ImageField()
 
     class Meta:
         ordering = ['-created_at']
