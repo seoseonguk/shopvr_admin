@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django_extensions',
-
     #local
     'inventory_management',
 ]
