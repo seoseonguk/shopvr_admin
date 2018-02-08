@@ -1,4 +1,4 @@
-from shopvr_admin.storages import S3Boto3Storage
+from storages.backends.s3boto3 import S3Boto3Storage
 
 class StaticS3Boto3Storage(S3Boto3Storage):
     location = 'static'
