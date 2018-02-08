@@ -19,3 +19,15 @@ class Order(models.Model):
 
     def get_absolute_url(self):
         return reverse('inventory:order_detail', args=[self.id])
+
+
+class Item(models.Model):
+    name = models.CharField(max_length=20)
+    supply_price = models.IntegerField()
+    delivery_price = models.IntegerField()
+    available_stock = models.IntegerField()
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+    def __str__(self):
+        return self.name
