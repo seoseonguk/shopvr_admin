@@ -21,7 +21,7 @@ from django.shortcuts import redirect
 urlpatterns = [
     path('', lambda r:redirect('inventory:order_list'),name='root'),
     path('admin/', admin.site.urls),
-    path('inventory/', include('inventory_management.urls', namespace='inventory'))
+    path('inventory/', include('inventory.urls', namespace='inventory'))
 ]
 
 if settings.DEBUG:

@@ -43,7 +43,7 @@ INSTALLED_APPS = [
 
     'django_extensions',
     #local
-    'inventory_management',
+    'inventory',
 ]
 
 MIDDLEWARE = [

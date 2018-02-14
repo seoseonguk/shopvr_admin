@@ -11,7 +11,7 @@ def order_list(request):
     if q:
         qs = qs.filter(store__icontains=q)
 
-    return render(request, 'inventory_management/order_list.html', {
+    return render(request, 'inventory/order_list.html', {
         'order_list': qs,
         'q':q,
     })
@@ -19,7 +19,7 @@ def order_list(request):
 def order_detail(request, id):
     print(id)
     order = get_object_or_404(Order,id=id)
-    return render(request, 'inventory_management/order_detail.html', {
+    return render(request, 'inventoryorder_detail.html', {
         'order':order,
     })
 
@@ -49,7 +49,7 @@ def post_new(request):
             return redirect('inventory:order_list')
     else:
         form = OrderForm()
-    return render(request, 'inventory_management/post_form.html', {
+    return render(request, 'inventory/post_form.html', {
         'form':form,
     })
 
@@ -62,10 +62,10 @@ def item_new(request):
             return redirect('inventory:order_list')
     else:
         form = ItemForm()
-    return render (request, 'inventory_management/post_form.html',{
+    return render (request, 'inventory/post_form.html',{
         'form':form,
     })
 
 
 def test(request):
-    return render(request, 'index.html')
+    return render(request, 'base.html')
