@@ -1,5 +1,5 @@
 from django import forms
-from .models import *
+from .models import Order, Item, Item_Category
 
 # store = models.CharField(max_length=100)
 # extra = models.TextField()
@@ -10,4 +10,9 @@ from .models import *
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['store','extra','coffee_bean']
+        fields = '__all__'
+
+class ItemForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = '__all__'

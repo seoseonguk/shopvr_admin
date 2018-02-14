@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import View
 from django.shortcuts import get_object_or_404, redirect
 from .models import Order
-from .forms import OrderForm
+from .forms import OrderForm, ItemForm
 
 
 def order_list(request):
@@ -52,3 +52,20 @@ def post_new(request):
     return render(request, 'inventory_management/post_form.html', {
         'form':form,
     })
+
+
+def item_new(request):
+    if request.method == 'POST':
+        form = ItemForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('inventory:order_list')
+    else:
+        form = ItemForm()
+    return render (request, 'inventory_management/post_form.html',{
+        'form':form,
+    })
+
+
+def test(request):
+    return render(request, 'index.html')
