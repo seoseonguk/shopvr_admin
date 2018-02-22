@@ -28,11 +28,10 @@
 </head>
 
 <body>
+{% block body %}
   <!-- Header -->
   <header id="js-header" class="u-header u-header--sticky-top">
-
     {% include "header.html" %}
-
   </header>
 
   <!-- End Header -->
@@ -43,8 +42,10 @@
       <!-- Sidebar Nav -->
         {% include "sidebar.html" %}
       <!-- End Sidebar Nav -->
-      {% block body %}
-          <div class="col g-ml-45 g-ml-0--lg g-pb-65--md">
+
+        <div class="col g-ml-45 g-ml-0--lg g-pb-65--md">
+
+      {% block content %}
         <div class="g-pa-20">
           <div class="row">
             <div class="col-sm-6 col-lg-6 col-xl-3 g-mb-30">
@@ -1000,8 +1001,9 @@
           </div>
         </footer>
         <!-- End Footer -->
-      </div>
+
       {% endblock %}
+              </div>
     </div>
   </main>
 
@@ -1009,7 +1011,7 @@
 {% include "javascript.html" %}
 {% block javascript %}
 {% endblock %}
-
+{% endblock %}
 </body>
 
 </html>

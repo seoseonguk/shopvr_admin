@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf.urls.static import static
 from django.urls import path, include
 from django.conf import settings
 from django.shortcuts import redirect
@@ -21,8 +22,11 @@ from django.shortcuts import redirect
 urlpatterns = [
     path('', lambda r:redirect('inventory:order_list'),name='root'),
     path('admin/', admin.site.urls),
-    path('inventory/', include('inventory.urls', namespace='inventory'))
+    path('inventory/', include('inventory.urls', namespace='inventory')),
+    path('accounts/', include('accounts.urls'))
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar
