@@ -23,7 +23,7 @@ module.exports = function (grunt) {
       options: {
         inject: 'test/unit/phantom.js'
       },
-      files: 'test/index.html'
+      files: 'test/base.html'
     },
     connect: {
       server: {
@@ -62,7 +62,7 @@ module.exports = function (grunt) {
           concurrency: 10,
           maxRetries: 3,
           maxPollRetries: 4,
-          urls: ['http://127.0.0.1:3000/test/index.html?hidepassed'],
+          urls: ['http://127.0.0.1:3000/test/base.html?hidepassed'],
           browsers: [ // https://wiki.saucelabs.com/display/DOCS/Platform+Configurator
             { // macOS
               'browserName': 'safari',
