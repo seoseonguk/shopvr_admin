@@ -41,9 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
+    'raven.contrib.django.raven_compat',
     'django_extensions',
     #local
+    'accounts',
     'inventory',
+    'store',
+    'survey'
 ]
 
 MIDDLEWARE = [
@@ -134,3 +139,15 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
+LOGIN_REDIRECT_URL = '/inventory/'
+
+import os
+import raven
+
+GIT_ROOT = BASE_DIR
+RAVEN_CONFIG = {
+    'dsn': 'https://15efb27d8d804a4c89f4abbfbe2026be:2677aa74a9b14e709d8b58444f8f31bf@sentry.io/288566',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': raven.fetch_git_sha(GIT_ROOT),
+}

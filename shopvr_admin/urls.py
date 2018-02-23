@@ -23,7 +23,9 @@ urlpatterns = [
     path('', lambda r:redirect('inventory:order_list'),name='root'),
     path('admin/', admin.site.urls),
     path('inventory/', include('inventory.urls', namespace='inventory')),
-    path('accounts/', include('accounts.urls'))
+    path('accounts/', include('accounts.urls')),
+    path('survey/', include('survey.urls', namespace='survey')),
+    path('store/', include('store.urls', namespace='store'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

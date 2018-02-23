@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="g-pa-20">
+    <h1 class="g-font-weight-300 g-font-size-24 g-color-black g-mb-30">Time Sales Data for {{ timesales_list.first.store }}</h1>
+
+
+
+    <header class="g-mb-20">
+      <h2 class="g-font-weight-400 g-font-size-16 g-color-black mb-0">{{ timesales_list.first.time|date:"SHORT_DATE_FORMAT" }}</h2>
+    </header>
+    <div class="table-responsive g-mb-40">
+      <table class="table u-table--v3 g-color-black">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Count</th>
+            <th>Sales</th>
+          </tr>
+        </thead>
+        <tbody>
+
+    {% for timesales in timesales_list %}
+        <tr>
+            <td>{{ timesales.time.time|date:"H" }}</td>
+            <td>{{ timesales.count }}</td>
+            <td>{{ timesales.sales }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    </div>
+{% endblock %}
+{% block javascript %}
+  <script>
+    $(document).on('ready', function () {
+      // initialization of custom select
+      $('.js-select').selectpicker();
+
+      $('.js-select').on('shown.bs.select', function (e) {
+        $(this).addClass('opened');
+      });
+
+      $('.js-select').on('hidden.bs.select', function (e) {
+        $(this).removeClass('opened');
+      });
+
+      // initialization of range datepicker
+      $.HSCore.components.HSRangeDatepicker.init('.js-range-datepicker');
+
+      // initialization of sidebar navigation component
+      $.HSCore.components.HSSideNav.init('.js-side-nav');
+
+      // initialization of hamburger
+      $.HSCore.helpers.HSHamburgers.init('.hamburger');
+
+      // initialization of HSDropdown component
+      $.HSCore.components.HSDropdown.init($('[data-dropdown-target]'), {dropdownHideOnScroll: false});
+
+      // initialization of custom scrollbar
+      $.HSCore.components.HSScrollBar.init($('.js-custom-scroll'));
+    });
+  </script>
+{% endblock %}
