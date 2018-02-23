@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'accounts',
     'inventory',
     'store',
-    'survey'
+    'sur'
 ]
 
 MIDDLEWARE = [
@@ -144,10 +144,17 @@ LOGIN_REDIRECT_URL = '/inventory/'
 import os
 import raven
 
-GIT_ROOT = BASE_DIR
+GIT_ROOT = os.path.join(BASE_DIR,'..')
+if os.path.exists(os.path.join(GIT_ROOT, '.git')):
+    release = raven.fetch_git_sha(GIT_ROOT)
+else:
+    release = 'dev'
+
 RAVEN_CONFIG = {
     'dsn': 'https://15efb27d8d804a4c89f4abbfbe2026be:2677aa74a9b14e709d8b58444f8f31bf@sentry.io/288566',
     # If you are using git, you can also automatically configure the
     # release based on the git info.
-    'release': raven.fetch_git_sha(GIT_ROOT),
+    'release': release,
 }
+
+print (RAVEN_CONFIG['release'])
