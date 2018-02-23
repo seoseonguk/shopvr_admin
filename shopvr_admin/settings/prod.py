@@ -21,7 +21,6 @@ DATABASES = {
     }
 }
 
-
 INSTALLED_APPS += ['storages']
 STATICFILES_STORAGE = 'shopvr_admin.storages.StaticS3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'shopvr_admin.storages.MediaS3Boto3Storage'
@@ -32,13 +31,3 @@ AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME'] # 필수 지정
 AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME', 'ap-northeast-2')
 
 
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'..','media')
-
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR,'..', 'staticfiles')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
