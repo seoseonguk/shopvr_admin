@@ -16,8 +16,8 @@ class Store(models.Model):
 class TimeSales(models.Model):
     time = models.DateTimeField()
     store = models.ForeignKey('Store', on_delete=models.CASCADE)
-    sales = models.IntegerField(blank=True)
-    count = models.SmallIntegerField(blank=True)
+    sales = models.IntegerField(null=True)
+    count = models.SmallIntegerField(null=True)
 
     def __str__(self):
         return ("{} - {}".format(self.store, self.time))

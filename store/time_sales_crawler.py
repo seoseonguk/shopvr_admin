@@ -1,3 +1,22 @@
+from bs4 import BeautifulSoup
+import requests
+from selenium.webdriver.support.ui import Select
+import datetime
+import pytz
+from store.models import TimeSales, Store
+from time import sleep
+store_list = ['hd1','hd2','sc','sw','bp','sh']
+store_dic = {
+    'hd1': 1000,
+    'hd2': 1001,
+    'sc': 1002,
+    'sw': 1003,
+    'sh': 1001
+}
+store_dic_kiosk = {
+    'hd1': '107',
+    'bp': '118'
+}
 
 # coding: utf-8
 
@@ -6,12 +25,12 @@
 # In[39]:
 
 
-def get_daily_time_sales_pos(store,year,month,day):
+def get_daily_time_sales_pos(driver_time, driver_time_sh, store, year, month, day):
     if store == 'sh':
         d = driver_time_sh
     else:
         d = driver_time
-    date = datetime.date((int(year) + 1900),month,day).strftime('%Y%m%d')
+    date = datetime.date((int(year)+1900), month, day).strftime('%Y%m%d')
     d.get('http://asp.posbank.co.kr/a23812/PES/Pes13_Date_Report.php')
     select = Select(d.find_element_by_name("searRCT_CODE"))
     select.select_by_value(str(store_dic[store]))
@@ -60,7 +79,7 @@ def get_token_kiosk():
     auth_response = requests.post(url, json = user_json, headers=headers).json()
     return auth_response['accessToken']
 
-def get_daily_time_sales_kiosk(store,year,month,day):
+def get_daily_time_sales_kiosk(token, store,year,month,day):
     headers = {
         'Authorization':'Bearer '+ token,
         'Referer':'http://kms.nicetcm.co.kr/',
@@ -82,15 +101,15 @@ def get_daily_time_sales_kiosk(store,year,month,day):
         sales_in_time['sale'] = time_sale['CARD_AMOUNT'] + time_sale['CASH_AMOUNT'] + time_sale['CASH_RECEIPT_AMOUNT']
         sales_in_time['count'] = time_sale['CARD_COUNT'] + time_sale['CASH_COUNT'] + time_sale['CASH_RECEIPT_COUNT']
         sales_in_time_dic[time] = sales_in_time
+    print(sales_in_time_dic)
     return sales_in_time_dic
-
 
 # In[38]:
 
 
-def get_daily_time_sales_for_all_store(year, month, day):
+def get_daily_time_sales_for_all_store(token, driver_time, driver_time_sh, year,month,day):
     for store in store_list:
-        get_daily_time_sales(store, year, month, day)
+        get_daily_time_sales(token, driver_time, driver_time_sh, store, year,month,day)
 
 
 # ## DB 저장 함수
@@ -98,16 +117,16 @@ def get_daily_time_sales_for_all_store(year, month, day):
 # In[34]:
 
 
-def get_daily_time_sales(store,year,month,day):
+def get_daily_time_sales(token, driver_time, driver_time_sh, store, year, month, day):
     p_sales= {}
     k_sales= {}
     try:
         store_id = Store.objects.get(slug=store)
         keys=['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']
         if store in store_dic_kiosk:
-            k_sales = get_daily_time_sales_kiosk(store,year,month,day)
+            k_sales = get_daily_time_sales_kiosk(token, store,year,month,day)
         if store in store_dic:
-            p_sales = get_daily_time_sales_pos(store,year,month,day)
+            p_sales = get_daily_time_sales_pos(driver_time, driver_time_sh, store,year,month,day)
         for key in keys:
             try:
                 k_sales[key]
@@ -122,88 +141,5 @@ def get_daily_time_sales(store,year,month,day):
             t_sales.sales = int(k_sales[key]['sale'])+int(p_sales[key]['sale'])
             t_sales.count = int(k_sales[key]['count'])+int(p_sales[key]['count'])
             t_sales.save()
-            print(t_sales)
     except:
         print("There is no store for sales data")
-
-
-
-# In[2]:
-if __name__=='__main__':
-    import os
-    import sys
-    PROJECT_ROOT = '/Users/seonguk-mac/shopvr_dev/shopvr_admin'
-    sys.path.append(os.path.dirname(PROJECT_ROOT))
-
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "shopvr_admin.settings.dev")
-    import django
-    django.setup()
-
-    from bs4 import BeautifulSoup
-    import requests
-    from selenium import webdriver
-    from selenium.webdriver.support.ui import Select
-    from time import sleep
-    import datetime
-    import pytz
-    from store.models import TimeSales, Store
-    from django.conf import settings
-
-    store_list = ['hd1','hd2','sc','sw','bp','sh']
-    print(store_list)
-    store_dic ={
-        'hd1':1000,
-        'hd2':1001,
-        'sc':1002,
-        'sw':1003,
-        'sh':1001
-    }
-    store_dic_kiosk = {
-        'hd1':'107',
-        'bp':'118'
-    }
-    options = webdriver.ChromeOptions()
-    options.add_argument('headless')
-    options.add_argument('window-size=1920x1080')
-    print("POS CHROME OPEN _ SALES _ SH")
-    driver_time = webdriver.Chrome(os.path.join(settings.BASE_DIR,'chromedriver'),chrome_options=options)
-    driver_time.implicitly_wait(3)
-    driver_time.get('http://asp.posbank.co.kr/')
-    driver_time.find_element_by_name('c_id').send_keys('bake2673')
-    driver_time.find_element_by_name('id').send_keys('10000000')
-    driver_time.find_element_by_name('passwd').send_keys('bake0605')
-    driver_time.find_element_by_xpath('//*[@id="vtab"]/div[1]/div[1]/form/div[3]/input[2]').click()
-    sleep(0.5)
-    print("POS CHROME OPEN _ TIME _ SALES _ HDSCSW")
-    driver_time_sh = webdriver.Chrome(os.path.join(settings.BASE_DIR,'chromedriver'),chrome_options=options)
-    driver_time_sh.implicitly_wait(3)
-    driver_time_sh.get('http://asp.posbank.co.kr/')
-    driver_time_sh.find_element_by_name('c_id').send_keys('h00871')
-    driver_time_sh.find_element_by_name('id').send_keys('10010000')
-    driver_time_sh.find_element_by_name('id').send_keys('10010000')
-    driver_time_sh.find_element_by_name('passwd').send_keys('sh2242')
-    driver_time_sh.find_element_by_xpath('//*[@id="vtab"]/div[1]/div[1]/form/div[3]/input[2]').click()
-    sleep(0.5)
-    print("POS CHROME OPEN _ TIME _ SALES _ SH")
-
-    """
-    여기까지는 크롤링을 위한 기본 로그인 작업
-    """
-
-    token = get_token_kiosk()
-    print("GET TOKEN FOR KIOSK")
-
-
-
-    #     ------------------------------------------
-    dt = datetime.datetime.now()
-    get_daily_time_sales_for_all_store(dt.year,dt.month,dt.day)
-    #     ------------------------------------------
-
-
-
-    driver_time.close()
-    driver_time_sh.close()
-    print("CLOSED ALL CHROME")
-
-
