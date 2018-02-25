@@ -14,10 +14,16 @@ class TimeSalesListView(ListView):
     model = TimeSales
 
     def get_queryset(self):
-        self.store = get_object_or_404(Store, slug=self.kwargs['store'])
-        print(self.store)
+        if self.request.GET.get('radGroupBtn1_1'):
+            print("!!!")
+            q = self.request.GET.get('radGroupBtn1_1')
+        else:
+            q = 'hd1'
+        print(q)
+        self.store = get_object_or_404(Store, slug=q)
         dt = datetime.datetime.now()
         return TimeSales.objects.filter(store=self.store, time__day=dt.day)
+
 
 
 
@@ -25,7 +31,10 @@ def update_time_sales(request):
     options = webdriver.ChromeOptions()
     options.add_argument('headless')
     options.add_argument('window-size=1920x1080')
-    driver_time = webdriver.Chrome(os.path.join(settings.BASE_DIR,'chromedriver_linux'),chrome_options=options)
+    # if settings.DEBUG == True:
+    driver_time = webdriver.Chrome(os.path.join(settings.BASE_DIR,'chromedriver'),chrome_options=options)
+    # else:
+    #     driver_time = webdriver.Chrome(os.path.join(settings.BASE_DIR,'chromedriver_linux'),chrome_options=options)
     driver_time.implicitly_wait(3)
     driver_time.get('http://asp.posbank.co.kr/')
     driver_time.find_element_by_name('c_id').send_keys('bake2673')
@@ -34,7 +43,10 @@ def update_time_sales(request):
     driver_time.find_element_by_xpath('//*[@id="vtab"]/div[1]/div[1]/form/div[3]/input[2]').click()
     sleep(0.5)
     print("POS CHROME OPEN _ TIME _ SALES _ HDSCSW")
-    driver_time_sh = webdriver.Chrome(os.path.join(settings.BASE_DIR,'chromedriver_linux'),chrome_options=options)
+    # if settings.DEBUG == True:
+    driver_time_sh = webdriver.Chrome(os.path.join(settings.BASE_DIR,'chromedriver'),chrome_options=options)
+    # else:
+    # driver_time_sh = webdriver.Chrome(os.path.join(settings.BASE_DIR,'chromedriver_linux'),chrome_options=options)
     driver_time_sh.implicitly_wait(3)
     driver_time_sh.get('http://asp.posbank.co.kr/')
     driver_time_sh.find_element_by_name('c_id').send_keys('h00871')

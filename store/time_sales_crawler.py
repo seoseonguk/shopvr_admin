@@ -120,26 +120,26 @@ def get_daily_time_sales_for_all_store(token, driver_time, driver_time_sh, year,
 def get_daily_time_sales(token, driver_time, driver_time_sh, store, year, month, day):
     p_sales= {}
     k_sales= {}
-    try:
-        store_id = Store.objects.get(slug=store)
-        keys=['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']
-        if store in store_dic_kiosk:
-            k_sales = get_daily_time_sales_kiosk(token, store,year,month,day)
-        if store in store_dic:
-            p_sales = get_daily_time_sales_pos(driver_time, driver_time_sh, store,year,month,day)
-        for key in keys:
-            try:
-                k_sales[key]
-            except:
-                k_sales[key] = {'sale':0,'count':0,'time':key}
-            try:
-                p_sales[key]
-            except:
-                p_sales[key] = {'sale':0,'count':0,'time':key}
-            dt = datetime.datetime(year, month, day, int(key), tzinfo=pytz.UTC)
-            t_sales, is_exist = TimeSales.objects.get_or_create(time=dt, store=store_id)
-            t_sales.sales = int(k_sales[key]['sale'])+int(p_sales[key]['sale'])
-            t_sales.count = int(k_sales[key]['count'])+int(p_sales[key]['count'])
-            t_sales.save()
-    except:
-        print("There is no store for sales data")
+    # try:
+    store_id = Store.objects.get(slug=store)
+    keys=['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']
+    if store in store_dic_kiosk:
+        k_sales = get_daily_time_sales_kiosk(token, store,year,month,day)
+    if store in store_dic:
+        p_sales = get_daily_time_sales_pos(driver_time, driver_time_sh, store,year,month,day)
+    for key in keys:
+        try:
+            k_sales[key]
+        except:
+            k_sales[key] = {'sale':0,'count':0,'time':key}
+        try:
+            p_sales[key]
+        except:
+            p_sales[key] = {'sale':0,'count':0,'time':key}
+        dt = datetime.datetime(year, month, day, int(key), tzinfo=pytz.UTC)
+        t_sales, is_exist = TimeSales.objects.get_or_create(time=dt, store=store_id)
+        t_sales.sales = int(k_sales[key]['sale'])+int(p_sales[key]['sale'])
+        t_sales.count = int(k_sales[key]['count'])+int(p_sales[key]['count'])
+        t_sales.save()
+# except:
+#     print("There is no store for sales data")
