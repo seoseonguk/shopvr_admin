@@ -140,6 +140,7 @@ def get_daily_time_sales(token, driver_time, driver_time_sh, store, year, month,
         t_sales, is_exist = TimeSales.objects.get_or_create(time=dt, store=store_id)
         t_sales.sales = int(k_sales[key]['sale'])+int(p_sales[key]['sale'])
         t_sales.count = int(k_sales[key]['count'])+int(p_sales[key]['count'])
+        print(t_sales)
         t_sales.save()
 # except:
 #     print("There is no store for sales data")

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Store, TimeSales
+from .models import Store, TimeSales, TestForKorean
 
 
 
@@ -9,3 +9,5 @@ class TimeSalesAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Store)
 admin.site.register(TimeSales,TimeSalesAdmin)
+
+admin.site.register(TestForKorean)

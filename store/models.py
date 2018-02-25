@@ -21,3 +21,10 @@ class TimeSales(models.Model):
 
     def __str__(self):
         return ("{} - {}".format(self.store, self.time))
+
+
+class TestForKorean(models.Model):
+    char = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.char

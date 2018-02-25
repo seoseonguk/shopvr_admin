@@ -74,6 +74,6 @@ def update_time_sales(request):
     driver_time_sh.close()
     print("CLOSED ALL CHROME")
 
-    return redirect('store:sales_time_list', store='hd1')
+    return redirect('store:time_sales_list')
 
 
