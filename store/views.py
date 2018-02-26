@@ -8,7 +8,7 @@ import datetime
 import os
 from django.conf import settings
 from .time_sales_crawler import get_daily_time_sales_for_all_store, get_token_kiosk
-from .daily_sales_crawler import update
+from .daily_sales_crawler import update,update_everything
 
 
 class DailySalesListView(ListView):
@@ -19,9 +19,14 @@ class DailySalesListView(ListView):
             q = self.request.GET.get('radGroupBtn1_1')
         else:
             q = 'hd1'
+        date = self.request.GET.get('datepickerforsales')
+        try:
+            dt = datetime.datetime.strptime(date,'%Y-%m')
+        except:
+            dt = datetime.datetime.now()
         self.store = get_object_or_404(Store, slug=q)
-        dt = datetime.datetime.now()
-        return DailySales.objects.filter(store=self.store, date__month=dt.month)
+        print(date, dt)
+        return DailySales.objects.filter(store=self.store, date__month=dt.month, date__year=dt.year)
 
 class TimeSalesListView(ListView):
     model = TimeSales
@@ -113,7 +118,8 @@ def update_daily_sales(request):
     token = get_token_kiosk()
     print("GET TOKEN FOR KIOSK")
 
-    update(token, driver, driver_sh)
+    update_everything(token, driver,driver_sh)
+    # update(token, driver, driver_sh)
     driver.close()
     driver_sh.close()
 
