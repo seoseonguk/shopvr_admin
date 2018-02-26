@@ -20,7 +20,7 @@ from django.conf import settings
 from django.shortcuts import redirect
 
 urlpatterns = [
-    path('', lambda r:redirect('inventory:order_list'),name='root'),
+    path('', lambda r:redirect('store:daily_sales_list'),name='root'),
     path('admin/', admin.site.urls),
     path('inventory/', include('inventory.urls', namespace='inventory')),
     path('accounts/', include('accounts.urls')),
