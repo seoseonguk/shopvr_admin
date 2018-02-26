@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load humanize %}
 
 {% block content %}
   <div class="g-pa-20">
@@ -53,13 +54,14 @@
             </div>
     </form>
     <header class="g-mb-20">
-      <h2 class="g-font-weight-400 g-font-size-16 g-color-black mb-0">{{ dailysales_list.first.date|date:"SHORT_DATE_FORMAT" }}</h2>
+      <h2 class="g-font-weight-400 g-font-size-16 g-color-black mb-0">{{ dailysales_list.first.date|date:"Y/M" }}</h2>
     </header>
     <div class="table-responsive g-mb-40">
       <table class="table u-table--v3 g-color-black">
         <thead>
           <tr>
             <th>날짜</th>
+            <th>요일</th>
             <th>포스 현금</th>
             <th>포스 카드</th>
             <th>키오스크 현금</th>
@@ -71,12 +73,13 @@
 
     {% for dailysales in dailysales_list %}
         <tr>
-            <td>{{ dailysales.date}}</td>
-            <td>{{ dailysales.pos_cash_sales }}</td>
-        <td>{{ dailysales.pos_card_sales }}</td>
-        <td>{{ dailysales.kiosk_cash_sales }}</td>
-        <td>{{ dailysales.kiosk_card_sales }}</td>
-        <td>{{ dailysales.total_sales }}</td>
+            <td>{{ dailysales.date|date:"M/d"}}</td>
+            <td>{{ dailysales.weekday }}</td>
+            <td>{{ dailysales.pos_cash_sales|intcomma }}</td>
+        <td>{{ dailysales.pos_card_sales|intcomma }}</td>
+        <td>{{ dailysales.kiosk_cash_sales|intcomma }}</td>
+        <td>{{ dailysales.kiosk_card_sales|intcomma }}</td>
+        <td>{{ dailysales.total_sales|intcomma }}</td>
         </tr>
     {% endfor %}
     </table>
