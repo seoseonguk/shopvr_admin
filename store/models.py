@@ -13,6 +13,21 @@ class Store(models.Model):
     def __str__(self):
         return self.title
 
+
+class DailySales(models.Model):
+    pos_cash_sales = models.IntegerField(null=True)
+    pos_card_sales = models.IntegerField(null=True)
+    kiosk_cash_sales = models.IntegerField(null=True)
+    kiosk_card_sales =models.IntegerField(null=True)
+    total_sales = models.IntegerField(null=True)
+    store = models.ForeignKey('Store', on_delete=models.CASCADE)
+    date = models.DateField()
+    weekday = models.CharField(max_length=10)
+
+    def __str__(self):
+        return ("{} - {}".format(self.store, self.date))
+
+
 class TimeSales(models.Model):
     time = models.DateTimeField()
     store = models.ForeignKey('Store', on_delete=models.CASCADE)
@@ -21,10 +36,3 @@ class TimeSales(models.Model):
 
     def __str__(self):
         return ("{} - {}".format(self.store, self.time))
-
-
-class TestForKorean(models.Model):
-    char = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.char
