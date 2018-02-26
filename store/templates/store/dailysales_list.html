@@ -72,7 +72,11 @@
         <tbody>
 
     {% for dailysales in dailysales_list %}
+        {% if dailysales.weekday == "SUN" or dailysales.weekday == "SAT" %}
+        <tr class="g-color-primary">
+        {% else %}
         <tr>
+        {% endif %}
             <td>{{ dailysales.date|date:"M/d"}}</td>
             <td>{{ dailysales.weekday }}</td>
             <td>{{ dailysales.pos_cash_sales|intcomma }}</td>
