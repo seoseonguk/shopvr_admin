@@ -15,6 +15,9 @@ class Store(models.Model):
 
 
 class DailySales(models.Model):
+    class Meta:
+        unique_together = ('store','date')
+
     pos_cash_sales = models.IntegerField(null=True)
     pos_card_sales = models.IntegerField(null=True)
     kiosk_cash_sales = models.IntegerField(null=True)
@@ -29,6 +32,9 @@ class DailySales(models.Model):
 
 
 class TimeSales(models.Model):
+    class Meta:
+        unique_together = ('store', 'time')
+
     time = models.DateTimeField()
     store = models.ForeignKey('Store', on_delete=models.CASCADE)
     sales = models.IntegerField(null=True)

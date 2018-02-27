@@ -118,8 +118,8 @@ def update_daily_sales(request):
     token = get_token_kiosk()
     print("GET TOKEN FOR KIOSK")
 
-    update_everything(token, driver,driver_sh)
-    # update(token, driver, driver_sh)
+    # update_everything(token, driver,driver_sh)
+    update(token, driver, driver_sh)
     driver.close()
     driver_sh.close()
 
