@@ -86,6 +86,13 @@
         <td>{{ dailysales.total_sales|intcomma }}</td>
         </tr>
     {% endfor %}
+      <tr>
+          <td>Total Sales</td>
+          <td></td>
+          {% for key,value in aggregated_data.items %}
+          <td>{{ value|intcomma }}</td>
+          {% endfor %}
+      </tr>
     </table>
     </div>
 {% endblock %}
