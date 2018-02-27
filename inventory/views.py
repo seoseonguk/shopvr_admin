@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.views.generic import View
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404, redirect
-from .models import Order, Item
-from .forms import OrderForm, ItemForm
+from .models import Order, Product
+# from .forms import OrderForm, ItemForm
 
 
 def order_list(request):
@@ -24,35 +24,35 @@ def order_detail(request, id):
         'order':order,
     })
 
-def post_new(request):
-    if request.method =='POST':
-        form = OrderForm(request.POST, request.FILES)
-        if form.is_valid():
-            # order = Order()
-            # order.coffee_bean = form.cleaned_data['coffee_bean']
-            # order.store = form.cleaned_data['store']
-            # order.extra = form.cleaned_data['extra']
-            # order.save()
-
-            # order = Order(coffee_bean=form.cleaned_data['coffee_bean'],
-            #               store=form.cleaned_data['store'],
-            #               extra=form.cleaned_data['extra'])
-            # order.save()
-            #
-            # order = Order.objects.create(coffee_bean=form.cleaned_data['coffee_bean'],
-            #               store=form.cleaned_data['store'],
-            #               extra=form.cleaned_data['extra' ])
-
-            # order = Order.objects.create(**form.cleaned_data)
-            # 딕셔너리 언팩을 통해서 하는 방법.
-
-            form.save()
-            return redirect('inventory:order_list')
-    else:
-        form = OrderForm()
-    return render(request, 'inventory/post_form.html', {
-        'form':form,
-    })
+# def post_new(request):
+#     if request.method =='POST':
+#         form = OrderForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             # order = Order()
+#             # order.coffee_bean = form.cleaned_data['coffee_bean']
+#             # order.store = form.cleaned_data['store']
+#             # order.extra = form.cleaned_data['extra']
+#             # order.save()
+#
+#             # order = Order(coffee_bean=form.cleaned_data['coffee_bean'],
+#             #               store=form.cleaned_data['store'],
+#             #               extra=form.cleaned_data['extra'])
+#             # order.save()
+#             #
+#             # order = Order.objects.create(coffee_bean=form.cleaned_data['coffee_bean'],
+#             #               store=form.cleaned_data['store'],
+#             #               extra=form.cleaned_data['extra' ])
+#
+#             # order = Order.objects.create(**form.cleaned_data)
+#             # 딕셔너리 언팩을 통해서 하는 방법.
+#
+#             form.save()
+#             return redirect('inventory:order_list')
+#     else:
+#         form = OrderForm()
+#     return render(request, 'inventory/post_form.html', {
+#         'form':form,
+#     })
 
 def test(request):
     return render(request, 'base.html')
@@ -60,21 +60,21 @@ def test(request):
 
 from django.views.generic import ListView, DetailView, CreateView
 
-class ItemListView(ListView):
-    model = Item
+class ProductListView(ListView):
+    model = Product
     # queryset = Item.objects.all()
 
 #     def get_queryset(self):
 #         qs = super().get_queryset()
 # #         재정의 내용
 
-class ItemDetailView(DetailView):
-    model = Item
+class ProductDetailView(DetailView):
+    model = Product
 
     # def get_context_data(self, **kwargs):
     #     return
-
-class ItemCreateView(CreateView):
-    model = Item
-    form_class = ItemForm
-    # success_url = reverse_lazy('inventory:item_list')
+#
+# class ProductCreateView(CreateView):
+#     model = Product
+#     form_class = ItemForm
+#     # success_url = reverse_lazy('inventory:item_list')
