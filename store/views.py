@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from .models import TimeSales, Store, DailySales
 # Create your views here.
 from selenium import webdriver
@@ -27,6 +27,58 @@ class DailySalesListView(ListView):
         self.store = get_object_or_404(Store, slug=q)
         print(date, dt)
         return DailySales.objects.filter(store=self.store, date__month=dt.month, date__year=dt.year)
+
+
+class SCDailySalesListView(ListView):
+    model = DailySales
+    template_name = "store/dailysales_list_single_company.html"
+
+    def get_queryset(self):
+        date = self.request.GET.get('datepickerforsales')
+        try:
+            dt = datetime.datetime.strptime(date,'%Y-%m')
+        except:
+            dt = datetime.datetime.now()
+        self.store = get_object_or_404(Store, slug='sc')
+        return DailySales.objects.filter(store=self.store, date__month=dt.month, date__year=dt.year)
+
+
+class BPDailySalesListView(ListView):
+    model = DailySales
+    template_name = "store/dailysales_list_single_company.html"
+
+    def get_queryset(self):
+        date = self.request.GET.get('datepickerforsales')
+        try:
+            dt = datetime.datetime.strptime(date,'%Y-%m')
+        except:
+            dt = datetime.datetime.now()
+        self.store = get_object_or_404(Store, slug='bp')
+        print(self.store)
+        print(dt)
+        print(DailySales.objects.filter(store=self.store, date__month=dt.month, date__year=dt.year))
+        return DailySales.objects.filter(store=self.store, date__month=dt.month, date__year=dt.year)
+
+class DailySalesAnalysisView(ListView):
+    model = DailySales
+
+    def get_queryset(self):
+        day_string = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
+        if self.request.GET.get('radGroupBtn1_1'):
+            q = self.request.GET.get('radGroupBtn1_1')
+        else:
+            q = 'hd1'
+
+        date = self.request.GET.get('datepickerforsales')
+        try:
+            dt = datetime.datetime.strptime(date,'%Y-%m-%d')
+        except:
+            dt = datetime.datetime.now()
+        print(dt)
+        self.store = get_object_or_404(Store, slug=q)
+        print(DailySales.objects.filter(store=self.store, weekday=day_string[dt.weekday()]).order_by("date"))
+        return DailySales.objects.filter(store=self.store, weekday=day_string[dt.weekday()]).order_by("date")
+
 
 class TimeSalesListView(ListView):
     model = TimeSales
@@ -118,8 +170,8 @@ def update_daily_sales(request):
     token = get_token_kiosk()
     print("GET TOKEN FOR KIOSK")
 
-    # update_everything(token, driver,driver_sh)
-    update(token, driver, driver_sh)
+    update_everything(token, driver,driver_sh)
+    # update(token, driver, driver_sh)
     driver.close()
     driver_sh.close()
 
