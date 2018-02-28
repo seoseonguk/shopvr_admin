@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_extensions',
     #local
     'accounts',
+    'core',
     'inventory',
     'store',
     'survey'

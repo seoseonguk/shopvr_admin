@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Store, TimeSales, DailySales
+from .models import Store, TimeSales, DailySales, NaverSearching
 
 
 
@@ -14,3 +14,4 @@ class DailySalesAdmin(admin.ModelAdmin):
 admin.site.register(Store)
 admin.site.register(TimeSales,TimeSalesAdmin)
 admin.site.register(DailySales,DailySalesAdmin)
+admin.site.register(NaverSearching)

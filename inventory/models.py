@@ -19,6 +19,7 @@ class PriceModel(models.Model):
     supply_price = models.IntegerField()
     delivery_price = models.IntegerField()
 
+
 class OrderStatusModel(models.Model):
     class Meta:
         abstract = True

@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, DetailView
-from .models import TimeSales, Store, DailySales
+from .models import TimeSales, Store, DailySales, NaverSearching
 # Create your views here.
 from selenium import webdriver
 from time import sleep
@@ -10,7 +10,7 @@ from django.conf import settings
 from .time_sales_crawler import get_daily_time_sales_for_all_store, get_token_kiosk
 from .daily_sales_crawler import update,update_everything
 from django.db.models import Sum
-
+import csv
 
 class DailySalesForAllStoreListView(ListView):
     model = DailySales
@@ -112,6 +112,22 @@ class TimeSalesListView(ListView):
         return TimeSales.objects.filter(store=self.store, time__day=dt.day)
 
 
+class NaverSearchingListView(ListView):
+    model = NaverSearching
+    def get_queryset(self):
+        if self.request.GET.get('radGroupBtn1_1'):
+            q = self.request.GET.get('radGroupBtn1_1')
+        else:
+            q = 'hd1'
+        self.store = get_object_or_404(Store, slug=q).slug
+        date = self.request.GET.get('datepickerforsales')
+        try:
+            dt = datetime.datetime.strptime(date,'%Y-%m-%d')
+        except:
+            dt = datetime.datetime.now()
+        dt = datetime.datetime.now()
+        return NaverSearching.objects.filter(store=self.store, date=dt)
+
 
 def update_time_sales(request):
     options = webdriver.ChromeOptions()
@@ -189,9 +205,44 @@ def update_daily_sales(request):
     token = get_token_kiosk()
     print("GET TOKEN FOR KIOSK")
 
-    update_everything(token, driver,driver_sh)
-    # update(token, driver, driver_sh)
+    # update_everything(token, driver,driver_sh)
+    update(token, driver, driver_sh)
     driver.close()
     driver_sh.close()
 
     return redirect('store:daily_sales_list')
+
+
+
+def update_naver_crawling_data(request):
+    store_list = ['hd1', 'hd2', 'sc', 'sw', 'bp', 'sh']
+    for store in store_list:
+        path_dir = os.path.join(settings.BASE_DIR,'sales_data/shopvr_'+store+'/naver_blog_share/')
+        file_list = os.listdir(path_dir)
+        print(file_list)
+        path = os.path.join(settings.BASE_DIR,'sales_data/shopvr_hd1/naver_blog_share/2018-01-29.csv')
+        for file in file_list:
+            if ".csv" in file:
+                file_add = os.path.join(path_dir,file)
+                with open(file_add) as f:
+                    date = file.replace('.csv','')
+                    reader = csv.reader(f)
+                    header = next(reader)
+                    print(header)
+                    for row in reader:
+                        store = store
+                        keyword = row[0]
+                        occupied = row[2] + ' , ' +row[4] + ' , '  + row[6] + ' , '  + row[8] + ' , '  + row[10]
+                        # occupied = occupied.replace(']', '').replace('[','')
+                        percent_first_page = row[1]
+                        percent_for_all = (float(row[1]) + float(row[3]) + float(row[5]) + float(row[7]) + float(row[9]))/5
+                        print(date,keyword,occupied,percent_first_page,percent_for_all)
+                        NaverSearching.objects.get_or_create(
+                            store = store,
+                            date = date,
+                            keyword= keyword,
+                            occupied= occupied,
+                            percent_first_page = percent_first_page,
+                            percent_for_all = percent_for_all
+                        )
+    return redirect('store:naver_blog_list')
