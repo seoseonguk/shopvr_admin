@@ -12,6 +12,9 @@ from .daily_sales_crawler import update,update_everything
 from django.db.models import Sum
 import csv
 
+
+
+
 class DailySalesForAllStoreListView(ListView):
     model = DailySales
     template_name = "store/dailysales_all.html"
@@ -83,22 +86,43 @@ class BPDailySalesListView(ListView):
 class DailySalesAnalysisView(ListView):
     model = DailySales
     template_name = "store/dailysales_analysis.html"
-    def get_queryset(self):
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
         day_string = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
+
         if self.request.GET.get('radGroupBtn1_1'):
             q = self.request.GET.get('radGroupBtn1_1')
         else:
             q = 'hd1'
-
         date = self.request.GET.get('datepickerforsales')
         try:
             dt = datetime.datetime.strptime(date,'%Y-%m-%d')
         except:
             dt = datetime.datetime.now()
-        print(dt)
         self.store = get_object_or_404(Store, slug=q)
-        return DailySales.objects.filter(store=self.store, weekday=day_string[dt.weekday()]).filter(date__lte=dt+datetime.timedelta(days=28), date__gte=dt+datetime.timedelta(days=-28)).order_by("date")
-
+        print(q, dt)
+        print(self.store)
+        print(DailySales.objects.filter(
+            store=self.store))
+        context['dailysales_list'] = DailySales.objects.filter(
+            store=self.store,
+            weekday=day_string[dt.weekday()]).filter(
+            date__lte=dt + datetime.timedelta(days=28),
+            date__gte=dt + datetime.timedelta(days=-28))\
+            .order_by("date")
+        context['timesales_list'] = TimeSales.objects.filter(
+            store=self.store,
+            time__year=dt.year,
+            time__month=dt.month,
+            time__day=dt.day)
+        context['naver_searching_list'] = NaverSearching.objects.filter(
+            store=self.store.slug,
+            date=dt)
+        context['searched_date'] = dt
+        print(context)
+        return context
 
 class TimeSalesListView(ListView):
     model = TimeSales
@@ -109,7 +133,7 @@ class TimeSalesListView(ListView):
             q = 'hd1'
         self.store = get_object_or_404(Store, slug=q)
         dt = datetime.datetime.now()
-        return TimeSales.objects.filter(store=self.store, time__day=dt.day)
+        return TimeSales.objects.filter(store=self.store, time__year=dt.year, time__month=dt.month, time__day=dt.day)
 
 
 class NaverSearchingListView(ListView):
@@ -219,8 +243,6 @@ def update_naver_crawling_data(request):
     for store in store_list:
         path_dir = os.path.join(settings.BASE_DIR,'sales_data/shopvr_'+store+'/naver_blog_share/')
         file_list = os.listdir(path_dir)
-        print(file_list)
-        path = os.path.join(settings.BASE_DIR,'sales_data/shopvr_hd1/naver_blog_share/2018-01-29.csv')
         for file in file_list:
             if ".csv" in file:
                 file_add = os.path.join(path_dir,file)
@@ -233,7 +255,6 @@ def update_naver_crawling_data(request):
                         store = store
                         keyword = row[0]
                         occupied = row[2] + ' , ' +row[4] + ' , '  + row[6] + ' , '  + row[8] + ' , '  + row[10]
-                        # occupied = occupied.replace(']', '').replace('[','')
                         percent_first_page = row[1]
                         percent_for_all = (float(row[1]) + float(row[3]) + float(row[5]) + float(row[7]) + float(row[9]))/5
                         print(date,keyword,occupied,percent_first_page,percent_for_all)
