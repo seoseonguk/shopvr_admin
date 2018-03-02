@@ -8,7 +8,7 @@ import datetime
 import os
 from django.conf import settings
 from .time_sales_crawler import get_daily_time_sales_for_all_store, get_token_kiosk
-from .daily_sales_crawler import update,update_everything
+from .daily_sales_crawler import update,update_everything,get_monthly_sales_for_all_store
 from django.db.models import Sum
 import csv
 
@@ -157,10 +157,9 @@ def update_time_sales(request):
     options = webdriver.ChromeOptions()
     options.add_argument('headless')
     options.add_argument('window-size=1920x1080')
-    # if settings.DEBUG == True:
+
+
     driver_time = webdriver.Chrome(os.path.join(settings.BASE_DIR,'chromedriver'),chrome_options=options)
-    # else:
-    #     driver_time = webdriver.Chrome(os.path.join(settings.BASE_DIR,'chromedriver_linux'),chrome_options=options)
     driver_time.implicitly_wait(3)
     driver_time.get('http://asp.posbank.co.kr/')
     driver_time.find_element_by_name('c_id').send_keys('bake2673')
@@ -169,10 +168,9 @@ def update_time_sales(request):
     driver_time.find_element_by_xpath('//*[@id="vtab"]/div[1]/div[1]/form/div[3]/input[2]').click()
     sleep(0.5)
     print("POS CHROME OPEN _ TIME _ SALES _ HDSCSW")
-    # if settings.DEBUG == True:
+
+
     driver_time_sh = webdriver.Chrome(os.path.join(settings.BASE_DIR,'chromedriver'),chrome_options=options)
-    # else:
-    # driver_time_sh = webdriver.Chrome(os.path.join(settings.BASE_DIR,'chromedriver_linux'),chrome_options=options)
     driver_time_sh.implicitly_wait(3)
     driver_time_sh.get('http://asp.posbank.co.kr/')
     driver_time_sh.find_element_by_name('c_id').send_keys('h00871')
@@ -191,7 +189,8 @@ def update_time_sales(request):
 
 
 
-    dt = datetime.datetime.now()
+    dt = datetime.datetime.now()\
+    # dt = dt + datetime.timedelta(days=-1)
     get_daily_time_sales_for_all_store(token, driver_time, driver_time_sh, dt.year,dt.month,dt.day)
 
 
@@ -231,6 +230,7 @@ def update_daily_sales(request):
 
     # update_everything(token, driver,driver_sh)
     update(token, driver, driver_sh)
+    # get_monthly_sales_for_all_store(token, driver, driver_sh, 2018, 2)
     driver.close()
     driver_sh.close()
 
