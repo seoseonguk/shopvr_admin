@@ -75,5 +75,6 @@ class NaverSearching(BaseStoreModel, TimeStampedModel):
     class Meta:
         verbose_name = "네이버 블로그 검색 결과"
         verbose_name_plural = verbose_name
-        unique_together = ('store', 'date', 'keyword')
+        unique_together = ('store', 'date', 'keyword', 'is_mobile')
+
 
