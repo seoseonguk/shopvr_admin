@@ -67,6 +67,7 @@ class NaverSearching(BaseStoreModel, TimeStampedModel):
     occupied = models.CharField(max_length=300)
     percent_first_page = models.FloatField(max_length=10)
     percent_for_all = models.FloatField(max_length=10)
+    is_mobile = models.BooleanField(default=0)
 
     def __str__(self):
         return ("{}({}) - {}".format(self.store , self.keyword, self.date))

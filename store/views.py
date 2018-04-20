@@ -203,36 +203,6 @@ def update_time_sales(request):
 
 
 def update_daily_sales(request):
-    options = webdriver.ChromeOptions()
-    options.add_argument('headless')
-    options.add_argument('window-size=1920x1080')
-    driver = webdriver.Chrome('/Users/seonguk-mac/chromedriver', chrome_options=options)
-    driver.implicitly_wait(3)
-    driver.get('http://m.posbank.co.kr/')
-    driver.find_element_by_name('c_id').send_keys('bake2673')
-    driver.find_element_by_name('id').send_keys('10000000')
-    driver.find_element_by_name('passwd').send_keys('bake0605')
-    driver.find_element_by_class_name('button').click()
-    sleep(0.5)
-    print("POS CHROME OPEN _ SALES _ HDSCSW")
-    driver_sh = webdriver.Chrome('/Users/seonguk-mac/chromedriver', chrome_options=options)
-    driver_sh.implicitly_wait(3)
-    driver_sh.get('http://m.posbank.co.kr/')
-    driver_sh.find_element_by_name('c_id').send_keys('h00871')
-    driver_sh.find_element_by_name('id').send_keys('10010000')
-    driver_sh.find_element_by_name('passwd').send_keys('sh2242')
-    driver_sh.find_element_by_class_name('button').click()
-    sleep(0.5)
-    print("POS CHROME OPEN _ SALES _ SH")
-
-    token = get_token_kiosk()
-    print("GET TOKEN FOR KIOSK")
-
-    # update_everything(token, driver,driver_sh)
-    update(token, driver, driver_sh)
-    # get_monthly_sales_for_all_store(token, driver, driver_sh, 2018, 2)
-    driver.close()
-    driver_sh.close()
 
     return redirect('store:daily_sales_list')
 
