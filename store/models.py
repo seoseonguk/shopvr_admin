@@ -70,7 +70,7 @@ class NaverSearching(BaseStoreModel, TimeStampedModel):
     is_mobile = models.BooleanField(default=0)
 
     def __str__(self):
-        return ("{}({}) - {}".format(self.store , self.keyword, self.date))
+        return ("{}({}_{}) - {}".format(self.store , self.keyword,self.is_mobile, self.date))
 
     class Meta:
         verbose_name = "네이버 블로그 검색 결과"
