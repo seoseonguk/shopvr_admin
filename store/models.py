@@ -68,6 +68,7 @@ class NaverSearching(BaseStoreModel, TimeStampedModel):
     percent_first_page = models.FloatField(max_length=10)
     percent_for_all = models.FloatField(max_length=10)
     is_mobile = models.BooleanField(default=0)
+    is_blog_only = models.BooleanField(default=1)
 
     def __str__(self):
         return ("{}({}) - {}".format(self.store , self.keyword, self.date))
@@ -75,5 +76,5 @@ class NaverSearching(BaseStoreModel, TimeStampedModel):
     class Meta:
         verbose_name = "네이버 블로그 검색 결과"
         verbose_name_plural = verbose_name
-        unique_together = ('store', 'date', 'keyword', 'is_mobile')
+        unique_together = ('store', 'date', 'keyword', 'is_mobile', 'is_blog_only')
 
