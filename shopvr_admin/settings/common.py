@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'accounts',
     'core',
     'inventory',
+    'location',
     'store',
     'survey'
 ]
