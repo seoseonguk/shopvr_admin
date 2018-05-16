@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'accounts',
     'core',
     'inventory',
-    'location',
+    'location_info',
     'store',
     'survey'
 ]
