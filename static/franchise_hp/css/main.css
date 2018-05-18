@@ -1,0 +1,156 @@
+.section_img{
+	width:1904px;
+	position:relative;
+	left:50%;
+	margin-left:-952px;
+}
+
+.section05_slides{
+	width:1180px;
+	margin:0 auto;
+	margin-bottom:80px;
+}
+
+.db_area{
+	width:1180px;
+	margin:80px auto 0;
+}
+
+.db_area .title{
+	font-size:36px;
+	text-align:center;
+}
+
+
+.db_area .db{
+	width:1180px;
+	margin:30px auto 0;
+}
+
+.db_area .db .top{
+	width:1180px;
+	display:inline-block;
+}
+
+
+.db_area .db .top .left{
+	width:570px;
+	display:inline-block;
+	float:left;
+}
+
+.db_area .db .top .left li{
+	display:inline-block;
+	width:100%;
+	margin-top:10px;
+}
+
+.db_area .db .top .left li:first-child{
+	margin-top:0px;
+}
+
+.db_area .db .top .left li .name{
+	display:inline-block;
+	width:85px;
+	float:left;
+	padding:10px 0px 10px 0px;
+}
+
+.db_area .db .top .left li .inputbox{
+	display:inline-block;
+	width:480px;
+	float:right;
+	border:1px solid #e5e5e5;
+	box-sizing:border-box;
+	padding:10px;
+}
+
+.inputstyle{
+	width:100%;
+	border:0px solid #000
+}
+
+.db_area .db .top .left li .call_input{
+	display:inline-block;
+	width:480px;
+	float:right;
+	border:0px solid #e5e5e5;
+}
+
+.db_area .db .top .left li .call_input div{
+	display:inline-block;
+	width:130px;
+	float:left;
+	border:1px solid #e5e5e5;
+	padding:10px;
+	margin-left:10px;
+}
+
+.db_area .db .top .left li .call_input div:first-child{
+	margin-left:0px
+}
+
+
+ .db_area .db .top .info{
+	width:590px;
+	padding:16px;
+	background-color:#f7f7f7;
+	box-sizing:border-box;
+	display:inline-block;
+	float:right;
+}
+
+.db_area .db .cont {
+	width:100%;
+	margin-top:20px;
+	display:inline-block;
+}
+
+.db_area .db .cont .name{
+	display:inline-block;
+	width:85px;
+	float:left;
+	padding:10px 0px 10px 0px;
+}
+
+.db_area .db .cont .textarea{
+	display:inline-block;
+	width:1090px;
+	float:right;
+	border:1px solid #e5e5e5;
+	box-sizing:border-box;
+	padding:10px;
+
+}
+
+.db_area .db .button {
+	width:100%;
+	padding:10px 0px 10px 0px;
+	background-color:#7e99bc;
+	color:#fff;
+	text-align:center;
+	margin-top:50px;
+	margin-bottom:50px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'accounts',
     'core',
     'inventory',
-    'location_info',
+    'location',
+    'franchise_hp',
     'store',
     'survey'
 ]
@@ -162,4 +163,9 @@ RAVEN_CONFIG = {
     'release': release,
 }
 
-print (RAVEN_CONFIG['release'])
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.sendgrid.net"
+
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

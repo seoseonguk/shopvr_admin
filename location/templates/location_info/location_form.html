@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+              <div class="g-hidden-sm-down g-bg-gray-light-v8 g-pa-20">
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit"/>
+        </form>
+
+              </div>
+{% endblock %}

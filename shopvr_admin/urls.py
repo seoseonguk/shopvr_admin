@@ -19,6 +19,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.shortcuts import redirect
 
+from core.views import send_email_to
+
 urlpatterns = [
     path('', lambda r:redirect('store:daily_sales_list'),name='root'),
     path('admin/', admin.site.urls),
@@ -26,7 +28,9 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('survey/', include('survey.urls', namespace='survey')),
     path('store/', include('store.urls', namespace='store')),
-    path('location_info/', include('location_info.urls', namespace='location_info'))
+    path('location/', include('location.urls', namespace='location')),
+    path('email/', send_email_to),
+    path('franchise/', include('franchise_hp.urls', namespace='franchise_hp'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
