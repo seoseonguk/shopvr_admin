@@ -22,15 +22,16 @@ from django.shortcuts import redirect
 from core.views import send_email_to
 
 urlpatterns = [
-    path('', lambda r:redirect('store:daily_sales_list'),name='root'),
-    path('admin/', admin.site.urls),
-    path('inventory/', include('inventory.urls', namespace='inventory')),
-    path('accounts/', include('accounts.urls')),
-    path('survey/', include('survey.urls', namespace='survey')),
-    path('store/', include('store.urls', namespace='store')),
-    path('location/', include('location.urls', namespace='location')),
-    path('email/', send_email_to),
-    path('franchise/', include('franchise_hp.urls', namespace='franchise_hp'))
+    path('', lambda r:redirect('franchise_hp:main'),name='root'),
+    path('admin/', lambda r:redirect('store:sales_analysis'),name='root_main'),
+    path('admin_django/', admin.site.urls),
+    path('admin/inventory/', include('inventory.urls', namespace='inventory')),
+    path('admin/accounts/', include('accounts.urls')),
+    path('admin/survey/', include('survey.urls', namespace='survey')),
+    path('admin/store/', include('store.urls', namespace='store')),
+    path('admin/location/', include('location.urls', namespace='location')),
+    path('admin/email/', send_email_to),
+    path('admin/franchise/', include('franchise_hp.urls', namespace='franchise_hp'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
