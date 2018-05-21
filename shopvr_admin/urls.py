@@ -31,7 +31,7 @@ urlpatterns = [
     path('admin/store/', include('store.urls', namespace='store')),
     path('admin/location/', include('location.urls', namespace='location')),
     path('admin/email/', send_email_to),
-    path('admin/franchise/', include('franchise_hp.urls', namespace='franchise_hp'))
+    path('franchise/', include('franchise_hp.urls', namespace='franchise_hp'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
