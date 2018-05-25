@@ -3,7 +3,7 @@
 
 {% block content %}
   <div class="g-pa-20">
-    <h1 class="g-font-weight-300 g-font-size-24 g-color-black g-mb-30"> 매출 분석 - {{ dailysales_list.first.store }} for {{ searched_date|date:"Y - M -d" }}</h1>
+    <h1 class="g-font-weight-300 g-font-size-24 g-color-black g-mb-30"> 매출 분석 - {{ dailysales_list.first.store }} for {{ searched_date|date:"Y - M -d" }}     <a href={{ download_link }} download>파일 다운로드</a></h1>
 
 
 
