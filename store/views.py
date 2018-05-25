@@ -25,8 +25,9 @@ class DailySalesListView(ListView):
         self.store = get_object_or_404(Store, slug=q)
 
         bucket_name= settings.AWS_STORAGE_BUCKET_NAME
-
-        s3 = boto3.client('s3')
+        region = settings.AWS_S3_REGION_NAME
+        session = boto3.session.Session(region_name=region)
+        s3 = session.client('s3', config=boto3.session.Config(signature_version='s3v4'))
         url = s3.generate_presigned_url(
             ClientMethod='get_object',
             Params={
@@ -67,7 +68,10 @@ class DailySalesAnalysisView(ListView):
 
         bucket_name= settings.AWS_STORAGE_BUCKET_NAME
 
-        s3 = boto3.client('s3')
+
+        region = settings.AWS_S3_REGION_NAME
+        session = boto3.session.Session(region_name=region)
+        s3 = session.client('s3', config=boto3.session.Config(signature_version='s3v4'))
         url = s3.generate_presigned_url(
             ClientMethod='get_object',
             Params={
