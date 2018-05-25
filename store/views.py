@@ -22,7 +22,7 @@ class DailySalesForAllStoreListView(ListView):
     def get_queryset(self):
         date = self.request.GET.get('datepickerforsales')
         try:
-            dt = datetime.datetime.strptime(date,'%Y-%m')
+            dt = datetime.datetime.strptime(date,'%D/%M/%Y')
         except:
             dt = datetime.datetime.now()
         daily_sales_q = DailySales.objects.filter(date__month=dt.month, date__year=dt.year).order_by('date').first()
@@ -42,7 +42,7 @@ class DailySalesListView(ListView):
             q = 'hd1'
         date = self.request.GET.get('datepickerforsales')
         try:
-            dt = datetime.datetime.strptime(date,'%Y-%m')
+            dt = datetime.datetime.strptime(date,'%D/%M/%Y')
         except:
             dt = datetime.datetime.now()
         self.store = get_object_or_404(Store, slug=q)
@@ -59,7 +59,7 @@ class SCDailySalesListView(ListView):
         context = super().get_context_data()
         date = self.request.GET.get('datepickerforsales')
         try:
-            dt = datetime.datetime.strptime(date,'%Y-%m')
+            dt = datetime.datetime.strptime(date,'%D/%M/%Y')
         except:
             dt = datetime.datetime.now()
         self.store = get_object_or_404(Store, slug='sc')
@@ -75,7 +75,7 @@ class BPDailySalesListView(ListView):
         context = super().get_context_data()
         date = self.request.GET.get('datepickerforsales')
         try:
-            dt = datetime.datetime.strptime(date,'%Y-%m')
+            dt = datetime.datetime.strptime(date,'%D/%M/%Y')
         except:
             dt = datetime.datetime.now()
         self.store = get_object_or_404(Store, slug='bp')
@@ -98,14 +98,11 @@ class DailySalesAnalysisView(ListView):
             q = 'hd1'
         date = self.request.GET.get('datepickerforsales')
         try:
-            dt = datetime.datetime.strptime(date,'%Y-%m-%d')
+            dt = datetime.datetime.strptime(date,'%d/%m/%Y')
         except:
             dt = datetime.datetime.now()
         self.store = get_object_or_404(Store, slug=q)
-        print(q, dt)
-        print(self.store)
-        print(DailySales.objects.filter(
-            store=self.store))
+        print(q, dt, date)
         context['dailysales_list'] = DailySales.objects.filter(
             store=self.store,
             weekday=day_string[dt.weekday()]).filter(
@@ -121,7 +118,6 @@ class DailySalesAnalysisView(ListView):
             store=self.store.slug,
             date=dt)
         context['searched_date'] = dt
-        print(context)
         return context
 
 class TimeSalesListView(ListView):
@@ -146,7 +142,7 @@ class NaverSearchingListView(ListView):
         self.store = get_object_or_404(Store, slug=q).slug
         date = self.request.GET.get('datepickerforsales')
         try:
-            dt = datetime.datetime.strptime(date,'%Y-%m-%d')
+            dt = datetime.datetime.strptime(date,'%D/%M/%Y')
         except:
             dt = datetime.datetime.now()
         dt = datetime.datetime.now()
