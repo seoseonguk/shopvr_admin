@@ -47,8 +47,6 @@ INSTALLED_APPS = [
     'django_extensions',
     #local
     'accounts',
-    'core',
-    'inventory',
     'location',
     'franchise_hp',
     'store',
@@ -171,4 +169,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER= os.environ['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD= os.environ['EMAIL_HOST_PASSWORD']
-
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME'] # 필수 지정
+AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME', 'ap-northeast-2')

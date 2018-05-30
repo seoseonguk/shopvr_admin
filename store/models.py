@@ -1,7 +1,12 @@
 from django.db import models
-from core.models import TimeStampedModel
 
 
+class TimeStampedModel(models.Model):
+    class Meta:
+        abstract = True
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class BaseStoreModel(models.Model):

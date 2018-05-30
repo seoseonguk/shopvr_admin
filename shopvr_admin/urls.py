@@ -19,18 +19,15 @@ from django.urls import path, include
 from django.conf import settings
 from django.shortcuts import redirect
 
-from core.views import send_email_to
 
 urlpatterns = [
     path('', lambda r:redirect('franchise_hp:main'),name='root'),
     path('admin/', lambda r:redirect('store:sales_analysis'),name='root_main'),
     path('admin_django/', admin.site.urls),
-    path('admin/inventory/', include('inventory.urls', namespace='inventory')),
     path('admin/accounts/', include('accounts.urls')),
     path('admin/survey/', include('survey.urls', namespace='survey')),
     path('admin/store/', include('store.urls', namespace='store')),
     path('admin/location/', include('location.urls', namespace='location')),
-    path('admin/email/', send_email_to),
     path('franchise/', include('franchise_hp.urls', namespace='franchise_hp'))
 ]
 
