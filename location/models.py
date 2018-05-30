@@ -26,12 +26,40 @@ class AddressModel(models.Model):
     level = models.IntegerField(blank=True)
 
 
+
+
+
+
+
+
+
 class SubwayStation(TimeStampedModel):
     title = models.CharField(max_length=20)
     category = models.CharField(max_length=10)
 
     def __str__(self):
         return "{} 호선 {} 역".format(self.category, self.title)
+
+
+
+
+
+
+class University(TimeStampedModel):
+    title = models.CharField(max_length=20)
+    distance_zero = models.ManyToManyField('SubwayStation', related_name='univ_distance_zero')
+    distance_one = models.ManyToManyField('SubwayStation', related_name='univ_distance_one')
+    distance_two = models.ManyToManyField('SubwayStation', related_name='univ_distance_two')
+    distnace_three = models.ManyToManyField('SubwayStation', related_name='univ_distance_three')
+
+    def __str__(self):
+        return self.title
+
+
+
+
+
+
 
 LOCATION_CLASS_CHOICES = {
     ('LV','주거'),
@@ -80,6 +108,15 @@ class MarketingAreaTag(TimeStampedModel):
     title = models.CharField(max_length=20)
 
 
+
+
+
+
+
+
+
+
+
 class Location(TimeStampedModel, AddressModel):
     nickname = models.CharField(max_length=20)
 
@@ -94,6 +131,16 @@ class Location(TimeStampedModel, AddressModel):
 
     def __str__(self):
         return self.nickname
+
+
+
+
+
+
+
+
+
+
 
 
 class Competitor(TimeStampedModel, AddressModel):
