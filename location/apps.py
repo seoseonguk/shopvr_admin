@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class LocationConfig(AppConfig):
-    name = 'location_info'
+    name = 'location'
