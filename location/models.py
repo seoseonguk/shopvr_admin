@@ -27,20 +27,24 @@ class AddressModel(models.Model):
 
 
 
-
-
-
-
-
-
 class SubwayStation(TimeStampedModel):
     title = models.CharField(max_length=20)
-    category = models.CharField(max_length=10)
+    station_category = models.ManyToManyField('StationCategory')
+    provience = models.CharField(max_length=20)
 
     def __str__(self):
-        return "{} 호선 {} 역".format(self.category, self.title)
+        return "{} 호선 {}".format(self.station_category, self.title)
 
 
+    class Meta:
+        unique_together = ('title','provience')
+
+
+class StationCategory(TimeStampedModel):
+    title = models.CharField(max_length=30)
+
+    def __str__(self):
+        return "{}".format(self.title)
 
 
 
