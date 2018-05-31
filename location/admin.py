@@ -1,7 +1,12 @@
 from django.contrib import admin
-from .models import SubwayStation, MarketingArea, MarketingAreaTag, Location
+from .models import MarketingArea, MarketingAreaTag, Location, SubwayStation, University
 # Register your models here.
-admin.site.register(SubwayStation)
+
+class SubwayStationAdmin(admin.ModelAdmin):
+    search_fields = ('title',)
+
+admin.site.register(SubwayStation, SubwayStationAdmin)
 admin.site.register(MarketingArea)
 admin.site.register(MarketingAreaTag)
 admin.site.register(Location)
+admin.site.register(University)

@@ -14,7 +14,7 @@ urlpatterns = [
     path('ma/', MarketingAreaListView.as_view(), name='marketingarea_list'),
     path('ma/new', MarketingAreaCreateView.as_view(), name='marketingarea_new'),
 
-    path('univ',UniversityListView.as_view(), name='univ_list'),
-    path('univ/<int:pk', UniversityDetailView.as_view(), name='univ_detail'),
+    path('univ/',UniversityListView.as_view(), name='univ_list'),
+    path('univ/<int:pk>', UniversityDetailView.as_view(), name='univ_detail'),
 
 ]

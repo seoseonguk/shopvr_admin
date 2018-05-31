@@ -36,8 +36,9 @@
   <!-- End Header -->
 
 
-  <main class="container-fluid px-0 g-pt-65">
+  <main class="container-fluid px-0">
     <div class="row no-gutters g-pos-rel g-overflow-x-hidden">
+
       <!-- Sidebar Nav -->
     {% block sidebar %}
         {% include "sidebar.html" %}
@@ -1008,12 +1009,13 @@
     </div>
   </main>
 
-
-{% include "javascript.html" %}
+    {% include "javascript.html" %}
 
 {% block javascript %}
 {% endblock %}
+
 {% endblock %}
+
 </body>
 
 </html>

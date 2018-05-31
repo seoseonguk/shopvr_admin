@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.shortcuts import reverse
 
 class TimeStampedModel(models.Model):
     class Meta:
@@ -33,12 +33,10 @@ class SubwayStation(TimeStampedModel):
     provience = models.CharField(max_length=20)
 
     def __str__(self):
-        return "{} 호선 {}".format(self.station_category, self.title)
-
+        return "{} - {}".format(self.provience, self.title)
 
     class Meta:
-        unique_together = ('title','provience')
-
+        unique_together=('title','provience')
 
 class StationCategory(TimeStampedModel):
     title = models.CharField(max_length=30)
@@ -54,48 +52,50 @@ class University(TimeStampedModel):
     distance_zero = models.ManyToManyField('SubwayStation', related_name='univ_distance_zero')
     distance_one = models.ManyToManyField('SubwayStation', related_name='univ_distance_one')
     distance_two = models.ManyToManyField('SubwayStation', related_name='univ_distance_two')
-    distnace_three = models.ManyToManyField('SubwayStation', related_name='univ_distance_three')
+    distance_three = models.ManyToManyField('SubwayStation', related_name='univ_distance_three')
 
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('location:univ_detail', args=[self.id])
 
 
 
 
 
 
-LOCATION_CLASS_CHOICES = {
-    ('LV','주거'),
-    ('UV','대학'),
-    ('TF','교통'),
-    ('OF','오피스')
-}
-
-COMSUMPTION_PROPENSITY_CHOICES = {
-    ('OVERALL','종합'),
-    ('ENTERTAINMENT','유흥'),
-    ('DATING','데이트'),
-    ('SHOPPING','쇼핑')
-
-}
-
-LOCATION_GRADE_CHOICES = {
-    ('S','S'),
-    ('A','A'),
-    ('B','B'),
-    ('C','C')
-}
 
 class MarketingArea(TimeStampedModel, AddressModel):
+
+    LOCATION_CLASS_CHOICES = {
+        ('LV', '주거'),
+        ('UV', '대학'),
+        ('TF', '교통'),
+        ('OF', '오피스')
+    }
+
+    COMSUMPTION_PROPENSITY_CHOICES = {
+        ('OVERALL', '종합'),
+        ('ENTERTAINMENT', '유흥'),
+        ('DATING', '데이트'),
+        ('SHOPPING', '쇼핑')
+
+    }
+
+    LOCATION_GRADE_CHOICES = {
+        ('S', 'S'),
+        ('A', 'A'),
+        ('B', 'B'),
+        ('C', 'C')
+    }
+
     title= models.CharField(max_length=20)
     location_class = models.CharField(max_length=20, choices=LOCATION_CLASS_CHOICES)
     comsumption_propensity = models.CharField(max_length=20, choices=COMSUMPTION_PROPENSITY_CHOICES)
     subway_station =  models.ManyToManyField('SubwayStation')
     location_point = models.IntegerField()
     location_grade = models.CharField(max_length=20, choices=LOCATION_GRADE_CHOICES)
-
-
 
 
     escape_room = models.IntegerField()

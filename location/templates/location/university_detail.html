@@ -5,208 +5,117 @@
             </script>
 
     {% endblock %}
+
 {% block content %}
     <div class="g-pa-20">
-        <div class="media-md align-items-center">
-
+<div class="g-pa-20">
+            <!-- User Card -->
+            <div class="col-xl-4">
+              <!-- User Card -->
+              <div class="card g-brd-gray-light-v7 text-center g-pt-20 g-pt-60--md g-mb-30">
+                <header class="g-mb-30">
+                    <div class="g-pa-20">
     <div id="map" style="width:100%;height:400px;"></div>
-        </div>
-
-    <div class="media-md align-items-center g-mt-40">
-              <div class="table-responsive">
-                <div id="DataTables_Table_2_wrapper" class="dataTables_wrapper no-footer"><div class="dataTables_length" id="DataTables_Table_2_length"><label>Show <select name="DataTables_Table_2_length" aria-controls="DataTables_Table_2" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="DataTables_Table_2_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="DataTables_Table_2"></label></div><table class="js-datatable table table-hover u-table--v3 u-editable-table--v1 g-color-black dataTable no-footer" data-dt-info="#datatableInfo3" data-dt-search="#datatableSearch3" data-dt-pagination="datatablePagination3" data-dt-page-length="5" data-dt-is-responsive="false" data-dt-pagination-classes="list-inline text-right mb-0" data-dt-pagination-items-classes="list-inline-item g-hidden-sm-down" data-dt-pagination-links-classes="u-pagination-v1__item u-pagination-v1-2 g-bg-lightblue-v3--active g-color-white--active g-brd-gray-light-v7 g-brd-lightblue-v3--hover g-brd-lightblue-v3--active g-rounded-4 g-py-8 g-px-15" data-dt-pagination-next-classes="list-inline-item" data-dt-pagination-next-link-classes="u-pagination-v1__item u-pagination-v1-2 g-brd-gray-light-v7 g-brd-lightblue-v3--hover g-rounded-4 g-py-8 g-px-12" data-dt-pagination-next-link-markup="<span class=&quot;g-line-height-1 g-valign-middle&quot; aria-hidden=&quot;true&quot;><i class=&quot;hs-admin-angle-right&quot;></i></span><span class=&quot;sr-only&quot;>Next</span>" data-dt-pagination-prev-classes="list-inline-item" data-dt-pagination-prev-link-classes="u-pagination-v1__item u-pagination-v1-2 g-brd-gray-light-v7 g-brd-lightblue-v3--hover g-rounded-4 g-py-8 g-px-12" data-dt-pagination-prev-link-markup="<span class=&quot;g-line-height-1 g-valign-middle&quot; aria-hidden=&quot;true&quot;><i class=&quot;hs-admin-angle-left&quot;></i></span><span class=&quot;sr-only&quot;>Prev</span>" data-dt-is-selectable="true" id="DataTables_Table_2" role="grid" aria-describedby="DataTables_Table_2_info" style="width: 1149px;">
-                  <thead class="thead-light">
-                    <tr role="row">
-                        <th class="g-hidden-xs-up sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label=": activate to sort column descending" style="width: 0px;"></th>
-                        <th class="g-first-child sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="
-
-                          Name
-
-
-
-
-
-
-
-
-
-
-
-
-                      : activate to sort column ascending" style="width: 216px;">
-                        <div class="media">
-                          <div class="d-flex align-self-center">이름</div>
-
-                          <div class="d-flex align-self-center ml-auto">
-                            <span class="d-inline-block g-width-10 g-line-height-1 g-font-size-10">
-                            <a class="g-color-gray-light-v6 g-color-lightblue-v3--hover g-text-underline--none--hover" href="#!">
-                              <i class="hs-admin-angle-up"></i>
-                            </a>
-                            <a class="g-color-gray-light-v6 g-color-lightblue-v3--hover g-text-underline--none--hover" href="#!">
-                              <i class="hs-admin-angle-down"></i>
-                            </a>
-                          </span>
-                          </div>
                         </div>
-                      </th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="
+                  <h3 class="g-font-weight-300 g-font-size-22 g-color-black g-mb-2">{{ object.title }}</h3>
+                  <em class="g-font-style-normal g-font-weight-300 g-color-gray-dark-v6">주소들어갈 예정</em>
+                </header>
 
-                          Category
+                <section class="row no-gutters g-brd-top g-brd-gray-light-v4">
+                  <div class="col-6 g-py-10 g-py-25--md">
+                    <strong class="d-block g-font-weight-500 g-font-size-18 g-color-black">지역 분류 들어갈 예정</strong>
+                    <span class="g-font-weight-300 g-color-gray-dark-v6">분류</span>
+                  </div>
 
-
-
-
-
-
-
-
-
-
-
-
-                      : activate to sort column ascending" style="width: 162px;">
-                        <div class="media">
-                          <div class="d-flex align-self-center">분류</div>
-
-                          <div class="d-flex align-self-center ml-auto">
-                            <span class="d-inline-block g-width-10 g-line-height-1 g-font-size-10">
-                            <a class="g-color-gray-light-v6 g-color-lightblue-v3--hover g-text-underline--none--hover" href="#!">
-                              <i class="hs-admin-angle-up"></i>
-                            </a>
-                            <a class="g-color-gray-light-v6 g-color-lightblue-v3--hover g-text-underline--none--hover" href="#!">
-                              <i class="hs-admin-angle-down"></i>
-                            </a>
-                          </span>
-                          </div>
-                        </div>
-                      </th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="
-
-                          보증금
-
-
-
-
-
-
-
-
-
-
-
-
-                      : activate to sort column ascending" style="width: 144px;">
-                        <div class="media">
-                          <div class="d-flex align-self-center">보증금</div>
-
-                          <div class="d-flex align-self-center ml-auto">
-                            <span class="d-inline-block g-width-10 g-line-height-1 g-font-size-10">
-                            <a class="g-color-gray-light-v6 g-color-lightblue-v3--hover g-text-underline--none--hover" href="#!">
-                              <i class="hs-admin-angle-up"></i>
-                            </a>
-                            <a class="g-color-gray-light-v6 g-color-lightblue-v3--hover g-text-underline--none--hover" href="#!">
-                              <i class="hs-admin-angle-down"></i>
-                            </a>
-                          </span>
-                          </div>
-                        </div>
-                      </th>
-                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="
-
-                          권리금
-
-
-
-
-
-
-
-
-
-
-
-
-                      : activate to sort column ascending" style="width: 144px;">
-                        <div class="media">
-                          <div class="d-flex align-self-center">권리금</div>
-
-                          <div class="d-flex align-self-center ml-auto">
-                            <span class="d-inline-block g-width-10 g-line-height-1 g-font-size-10">
-                            <a class="g-color-gray-light-v6 g-color-lightblue-v3--hover g-text-underline--none--hover" href="#!">
-                              <i class="hs-admin-angle-up"></i>
-                            </a>
-                            <a class="g-color-gray-light-v6 g-color-lightblue-v3--hover g-text-underline--none--hover" href="#!">
-                              <i class="hs-admin-angle-down"></i>
-                            </a>
-                          </span>
-                          </div>
-                        </div>
-                      </th>
-                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="
-
-                          월세
-
-
-
-
-
-
-
-
-
-
-
-
-                      : activate to sort column ascending" style="width: 144px;">
-                        <div class="media">
-                          <div class="d-flex align-self-center">월세 (관리비)</div>
-
-                          <div class="d-flex align-self-center ml-auto">
-                            <span class="d-inline-block g-width-10 g-line-height-1 g-font-size-10">
-                            <a class="g-color-gray-light-v6 g-color-lightblue-v3--hover g-text-underline--none--hover" href="#!">
-                              <i class="hs-admin-angle-up"></i>
-                            </a>
-                            <a class="g-color-gray-light-v6 g-color-lightblue-v3--hover g-text-underline--none--hover" href="#!">
-                              <i class="hs-admin-angle-down"></i>
-                            </a>
-                          </span>
-                          </div>
-                        </div>
-                      </th>
-
-                  </thead>
-
-                  <tbody>
-                  {% for obj in object_list %}
-
-                  <tr class="g-bg-gray-light-v8--opacity-0_4--checked odd checked" role="row">
-                      <td class="g-hidden-xs-up sorting_1">1</td>
-                      <td class="js-select text-left g-first-child">
-                        <label class="form-check-inline u-check g-pl-45 mb-0 mr-0">
-                          <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0" type="checkbox">
-                          <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0 g-bg-lightblue-v3--checked g-brd-lightblue-v3--checked">
-                            <i class="fa" data-check-icon=""></i>
-                          </div>
-                          {{ obj.nickname }}
-                        </label>
-                      </td>
-                      <td>
-                        <div class="d-inline-block">
-                          <span class="d-flex align-items-center justify-content-center u-tags-v1 g-brd-around g-bg-gray-light-v8 g-bg-gray-light-v8 g-font-size-default g-color-gray-dark-v6 g-rounded-50 g-py-4 g-px-15">
-                          <span class="u-badge-v2--md g-pos-stc g-transform-origin--top-left g-bg-lightblue-v3 g-mr-8"></span>
-                          Employees
-                          </span>
-                        </div>
-                      </td>
-                      <td>{{ obj.deposit }}</td>
-                      <td>{{ obj.premium_deposit }}</td>
-                      <td>{{ obj.monthly_rent_fee }} ({{ obj.maintainence_cost }})</td>
-
-                  </tr>
-
-                  {% endfor %}
-                  </tbody>
-                </table><div class="dataTables_info" id="DataTables_Table_2_info" role="status" aria-live="polite">Showing 1 to 5 of 25 entries</div><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_2_paginate"><a class="paginate_button previous disabled" aria-controls="DataTables_Table_2" data-dt-idx="0" tabindex="0" id="DataTables_Table_2_previous">Previous</a><span><a class="paginate_button current" aria-controls="DataTables_Table_2" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="DataTables_Table_2" data-dt-idx="2" tabindex="0">2</a><a class="paginate_button " aria-controls="DataTables_Table_2" data-dt-idx="3" tabindex="0">3</a><a class="paginate_button " aria-controls="DataTables_Table_2" data-dt-idx="4" tabindex="0">4</a><a class="paginate_button " aria-controls="DataTables_Table_2" data-dt-idx="5" tabindex="0">5</a></span><a class="paginate_button next" aria-controls="DataTables_Table_2" data-dt-idx="6" tabindex="0" id="DataTables_Table_2_next">Next</a></div></div>
+                  <div class="col-6 g-brd-left--md g-brd-gray-light-v4 g-py-10 g-py-25--md">
+                    <strong class="d-block g-font-weight-500 g-font-size-18 g-color-black">추가될 예</strong>
+                    <span class="g-font-weight-300 g-color-gray-dark-v6">대학정원</span>
+                  </div>
+                </section>
               </div>
+              <!-- End User Card -->
             </div>
+            <!-- End User Card -->
+
+            <!-- About Card -->
+            <div class="col-xl-8">
+              <!-- About Card -->
+              <div class="card g-brd-gray-light-v7 g-pa-15 g-pa-25-30--md g-mb-30">
+                <section class="g-mb-20">
+                  <h3 class="text-uppercase g-font-size-12 g-font-size-default--md g-color-black g-mb-20">대학 주변 상권 분석</h3>
+
+                  <div class="g-font-weight-300 g-color-gray-dark-v6 g-mb-20">
+                    <span class="g-font-size-40 g-color-black">대학 상권 점수 추가 예정</span>
+                    <span class="g-font-size-18 g-mr-6">/ 10.0</span>
+                    Overall Rating
+                  </div>
+
+                  <p class="g-font-weight-300 g-color-gray-dark-v6 mb-0">대학 상권에 대한 간단한 리뷰가 들어갈 예정입니다. 대학의 등급을 매기는 것은 아니고, 대학 주변에 어떤식으로 상권이 형성되어 있는지, 그들이 주로 활동을 위해서 방문하는 상권이 어디인지에 대해서 업로드할 예정입니다.</p>
+                </section>
+
+                <section class="row">
+                  <div class="col-md-6 g-mb-20 g-mb-20--md">
+                    <h3 class="text-uppercase g-font-size-12 g-font-size-default--md g-color-black g-mb-20">0개 거리 지하철역 </h3>
+
+                    <ul class="u-list-inline mb-0">
+                        {% for station_obj in object.distance_zero.all %}
+                            <li class="list-inline-item g-mb-6 g-mr-2">
+                            <a class="u-tags-v1 g-bg-lightblue-v3--hover g-color-gray-dark-v6 g-color-white--hover g-brd-around g-brd-gray-light-v4 g-brd-lightblue-v3--hover g-rounded-50 g-px-10 g-px-20--md g-py-2" href="#!">{{ station_obj }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                  </div>
+                </section>
+                <section class="row">
+                  <div class="col-md-6 g-mb-20 g-mb-20--md">
+                    <h3 class="text-uppercase g-font-size-12 g-font-size-default--md g-color-black g-mb-20">1개 거리 지하철역 </h3>
+
+                    <ul class="u-list-inline mb-0">
+                        {% for station_obj in object.distance_one.all %}
+                            <li class="list-inline-item g-mb-6 g-mr-2">
+                            <a class="u-tags-v1 g-bg-lightblue-v3--hover g-color-gray-dark-v6 g-color-white--hover g-brd-around g-brd-gray-light-v4 g-brd-lightblue-v3--hover g-rounded-50 g-px-10 g-px-20--md g-py-2" href="#!">{{ station_obj }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                  </div>
+                </section>
+                <section class="row">
+                  <div class="col-md-6 g-mb-20 g-mb-20--md">
+                    <h3 class="text-uppercase g-font-size-12 g-font-size-default--md g-color-black g-mb-20">2개 거리 지하철역 </h3>
+
+                    <ul class="u-list-inline mb-0">
+                        {% for station_obj in object.distance_two.all %}
+                            <li class="list-inline-item g-mb-6 g-mr-2">
+                            <a class="u-tags-v1 g-bg-lightblue-v3--hover g-color-gray-dark-v6 g-color-white--hover g-brd-around g-brd-gray-light-v4 g-brd-lightblue-v3--hover g-rounded-50 g-px-10 g-px-20--md g-py-2" href="#!">{{ station_obj }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                  </div>
+                </section>
+                <section class="row">
+                  <div class="col-md-6 g-mb-20 g-mb-0--md">
+                    <h3 class="text-uppercase g-font-size-12 g-font-size-default--md g-color-black g-mb-20">3개 거리 지하철역 </h3>
+
+                    <ul class="u-list-inline mb-0">
+                        {% for station_obj in object.distance_three.all %}
+                            <li class="list-inline-item g-mb-6 g-mr-2">
+                            <a class="u-tags-v1 g-bg-lightblue-v3--hover g-color-gray-dark-v6 g-color-white--hover g-brd-around g-brd-gray-light-v4 g-brd-lightblue-v3--hover g-rounded-50 g-px-10 g-px-20--md g-py-2" href="#!">{{ station_obj }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                  </div>
+                </section>
+              </div>
+              <!-- End About Card -->
+
+            </div>
+            <!-- End About Card -->
+      </div>
+
 
 
 {% endblock %}
