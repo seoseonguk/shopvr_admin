@@ -13,13 +13,16 @@ class DailySalesListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
+        print(self.request.GET.get('datepickerforsales'))
+
         if self.request.GET.get('radGroupBtn1_1'):
             q = self.request.GET.get('radGroupBtn1_1')
         else:
             q = 'hd1'
         date = self.request.GET.get('datepickerforsales')
+
         try:
-            dt = datetime.datetime.strptime(date,'%D/%M/%Y')
+            dt = datetime.datetime.strptime(date, '%d/%m/%Y')
         except:
             dt = datetime.datetime.now()
         self.store = get_object_or_404(Store, slug=q)
@@ -35,12 +38,13 @@ class DailySalesListView(ListView):
                 'Key': 'data/shopvr_'+q+'/'+q+'-'+ dt.strftime("%Y-%m")+'.csv'
             }
         )
-
-        print(url)
+        print(dt)
         context['download_link'] = url
-
         context['dailysales_list'] = DailySales.objects.filter(store=self.store, date__month=dt.month, date__year=dt.year)
         context['aggregated_data'] = DailySales.objects.filter(store=self.store, date__month=dt.month, date__year=dt.year).aggregate(Sum('pos_cash_sales'),Sum('pos_card_sales'),Sum('kiosk_cash_sales'),Sum('kiosk_card_sales'),Sum('total_sales'))
+
+
+        print(context)
         return context
 
 
