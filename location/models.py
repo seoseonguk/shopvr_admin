@@ -31,12 +31,18 @@ class SubwayStation(TimeStampedModel):
     title = models.CharField(max_length=20)
     station_category = models.ManyToManyField('StationCategory')
     provience = models.CharField(max_length=20)
+    university_point = models.IntegerField(default=0)
 
     def __str__(self):
         return "{} - {}".format(self.provience, self.title)
 
+    def get_absolute_url(self):
+        return reverse('location:subway_detail',args=[self.pk])
+
     class Meta:
         unique_together=('title','provience')
+
+
 
 class StationCategory(TimeStampedModel):
     title = models.CharField(max_length=30)
@@ -58,7 +64,7 @@ class University(TimeStampedModel):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('location:univ_detail', args=[self.id])
+        return reverse('location:univ_detail', args=[self.pk])
 
 
 
@@ -66,7 +72,7 @@ class University(TimeStampedModel):
 
 
 
-class MarketingArea(TimeStampedModel, AddressModel):
+class MarketingArea(TimeStampedModel):
 
     LOCATION_CLASS_CHOICES = {
         ('LV', '주거'),

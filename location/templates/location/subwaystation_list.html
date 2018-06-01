@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+    {% block css %}
+            <script type="text/javascript"
+                    src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=ph0ktfoUW7YHDkkxaOzT">
+            </script>
+
+    {% endblock %}
+{% block content %}
+    <div class="g-pa-20">
+
+            <div class="media-md align-items-center g-mb-30">
+              <div class="d-flex g-mb-15 g-mb-0--md">
+                <h3 class="g-font-weight-400 g-font-size-16 g-color-black mb-0">Complex Table with Select &amp; Actions</h3>
+              </div>
+
+              <div class="media d-md-flex align-items-center ml-auto">
+                <a class="d-flex align-items-center u-link-v5 g-color-lightblue-v3 g-color-primary--hover" href="#!">
+                  <i class="hs-admin-import g-font-size-18"></i>
+                  <span class="g-hidden-sm-down g-ml-10">Download Contacts</span>
+                </a>
+
+                <a class="d-flex align-items-center u-link-v5 g-color-lightblue-v3 g-color-primary--hover g-ml-15 g-ml-45--md" href="#!">
+                  <i class="hs-admin-share g-font-size-18"></i>
+                  <span class="g-hidden-sm-down g-ml-10">Share</span>
+                </a>
+
+                <div class="d-flex g-ml-15 g-ml-55--md">
+                  <div class="input-group g-pos-rel g-width-320--md">
+                    <input id="datatableSearch3" class="form-control g-font-size-default g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-rounded-20 g-pl-20 g-pr-50 g-py-10" type="text" placeholder="Search for name, position">
+                    <button class="btn g-pos-abs g-top-0 g-right-0 g-z-index-2 g-width-60 h-100 g-bg-transparent g-font-size-16 g-color-lightred-v2 g-color-lightblue-v3--hover rounded-0" type="submit">
+                      <i class="hs-admin-search g-absolute-centered"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="g-mb-40">
+              <div class="table-responsive">
+                <table class="js-datatable table table-hover u-table--v3 u-editable-table--v1 g-color-black" data-dt-info="#datatableInfo3" data-dt-search="#datatableSearch3" data-dt-pagination="datatablePagination3" data-dt-page-length="5" data-dt-is-responsive="false"
+                data-dt-pagination-classes="list-inline text-right mb-0" data-dt-pagination-items-classes="list-inline-item g-hidden-sm-down" data-dt-pagination-links-classes="u-pagination-v1__item u-pagination-v1-2 g-bg-lightblue-v3--active g-color-white--active g-brd-gray-light-v7 g-brd-lightblue-v3--hover g-brd-lightblue-v3--active g-rounded-4 g-py-8 g-px-15"
+                data-dt-pagination-next-classes="list-inline-item" data-dt-pagination-next-link-classes="u-pagination-v1__item u-pagination-v1-2 g-brd-gray-light-v7 g-brd-lightblue-v3--hover g-rounded-4 g-py-8 g-px-12" data-dt-pagination-next-link-markup='<span class="g-line-height-1 g-valign-middle" aria-hidden="true"><i class="hs-admin-angle-right"></i></span><span class="sr-only">Next</span>'
+                data-dt-pagination-prev-classes="list-inline-item" data-dt-pagination-prev-link-classes="u-pagination-v1__item u-pagination-v1-2 g-brd-gray-light-v7 g-brd-lightblue-v3--hover g-rounded-4 g-py-8 g-px-12" data-dt-pagination-prev-link-markup='<span class="g-line-height-1 g-valign-middle" aria-hidden="true"><i class="hs-admin-angle-left"></i></span><span class="sr-only">Prev</span>'
+                data-dt-is-selectable="true">
+                  <thead class="thead-light">
+                    <tr>
+                      <th class="g-hidden-xs-up"></th>
+                      <th class="g-first-child">
+                        <div class="media">
+                          <div class="d-flex align-self-center">Name</div>
+
+                          <div class="d-flex align-self-center ml-auto">
+                            <span class="d-inline-block g-width-10 g-line-height-1 g-font-size-10">
+                            <a class="g-color-gray-light-v6 g-color-lightblue-v3--hover g-text-underline--none--hover" href="#!">
+                              <i class="hs-admin-angle-up"></i>
+                            </a>
+                            <a class="g-color-gray-light-v6 g-color-lightblue-v3--hover g-text-underline--none--hover" href="#!">
+                              <i class="hs-admin-angle-down"></i>
+                            </a>
+                          </span>
+                          </div>
+                        </div>
+                      </th>
+                      <th>
+                        <div class="media">
+                          <div class="d-flex align-self-center">Category</div>
+
+                          <div class="d-flex align-self-center ml-auto">
+                            <span class="d-inline-block g-width-10 g-line-height-1 g-font-size-10">
+                            <a class="g-color-gray-light-v6 g-color-lightblue-v3--hover g-text-underline--none--hover" href="#!">
+                              <i class="hs-admin-angle-up"></i>
+                            </a>
+                            <a class="g-color-gray-light-v6 g-color-lightblue-v3--hover g-text-underline--none--hover" href="#!">
+                              <i class="hs-admin-angle-down"></i>
+                            </a>
+                          </span>
+                          </div>
+                        </div>
+                      </th>
+                      <th>
+                        <div class="media">
+                          <div class="d-flex align-self-center">Role</div>
+
+                          <div class="d-flex align-self-center ml-auto">
+                            <span class="d-inline-block g-width-10 g-line-height-1 g-font-size-10">
+                            <a class="g-color-gray-light-v6 g-color-lightblue-v3--hover g-text-underline--none--hover" href="#!">
+                              <i class="hs-admin-angle-up"></i>
+                            </a>
+                            <a class="g-color-gray-light-v6 g-color-lightblue-v3--hover g-text-underline--none--hover" href="#!">
+                              <i class="hs-admin-angle-down"></i>
+                            </a>
+                          </span>
+                          </div>
+                        </div>
+                      </th>
+                      <th>
+                        <div class="media">
+                          <div class="d-flex align-self-center">Email</div>
+
+                          <div class="d-flex align-self-center ml-auto">
+                            <span class="d-inline-block g-width-10 g-line-height-1 g-font-size-10">
+                            <a class="g-color-gray-light-v6 g-color-lightblue-v3--hover g-text-underline--none--hover" href="#!">
+                              <i class="hs-admin-angle-up"></i>
+                            </a>
+                            <a class="g-color-gray-light-v6 g-color-lightblue-v3--hover g-text-underline--none--hover" href="#!">
+                              <i class="hs-admin-angle-down"></i>
+                            </a>
+                          </span>
+                          </div>
+                        </div>
+                      </th>
+
+                      <th></th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                  {% for obj in object_list %}
+
+                    <tr class="g-bg-gray-light-v8--opacity-0_4--checked">
+                      <td class="g-hidden-xs-up">{{ obj.pk }}</td>
+                      <td class="js-select text-left g-first-child">
+                        <label class="form-check-inline u-check g-pl-45 mb-0 mr-0">
+                            <a href="{{ obj.get_absolute_url }}">
+                          {{ obj.title }}</a>
+                        </label>
+                      </td>
+                      <td>
+                          {{ obj.provience }}
+                      </td>
+                      <td>
+                          {% for cat in obj.station_category.all %}
+                          {{ cat }}
+                          {% endfor %}
+                      </td>
+                      <td>
+                          {{ obj.university_point }}
+                      </td>
+
+                  </tr>
+
+                  {% endfor %}
+                  </tbody>
+                </table><div class="dataTables_info" id="DataTables_Table_2_info" role="status" aria-live="polite">Showing 1 to 5 of 25 entries</div><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_2_paginate"><a class="paginate_button previous disabled" aria-controls="DataTables_Table_2" data-dt-idx="0" tabindex="0" id="DataTables_Table_2_previous">Previous</a><span><a class="paginate_button current" aria-controls="DataTables_Table_2" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="DataTables_Table_2" data-dt-idx="2" tabindex="0">2</a><a class="paginate_button " aria-controls="DataTables_Table_2" data-dt-idx="3" tabindex="0">3</a><a class="paginate_button " aria-controls="DataTables_Table_2" data-dt-idx="4" tabindex="0">4</a><a class="paginate_button " aria-controls="DataTables_Table_2" data-dt-idx="5" tabindex="0">5</a></span><a class="paginate_button next" aria-controls="DataTables_Table_2" data-dt-idx="6" tabindex="0" id="DataTables_Table_2_next">Next</a></div></div>
+              </div>
+            </div>
+
+
+{% endblock %}
+
+{% block javascript %}
+    <script>
+var mapOptions = {
+    center: new naver.maps.LatLng(37.3595704, 127.105399),
+    zoom: 10
+};
+
+var map = new naver.maps.Map('map', mapOptions);
+
+
+      // initialization of datatables
+      $.HSCore.components.HSDatatables.init('.js-datatable');
+
+</script>
+{% endblock %}
+

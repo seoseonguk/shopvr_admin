@@ -4,7 +4,9 @@ from .views import (LocationListView,
                     MarketingAreaCreateView,
                     MarketingAreaListView,
                     UniversityDetailView,
-                    UniversityListView)
+                    UniversityListView,
+                    SubwayStationListView,
+                    SubwayStationDetailView)
 
 app_name = 'location'
 urlpatterns = [
@@ -16,5 +18,8 @@ urlpatterns = [
 
     path('univ/',UniversityListView.as_view(), name='univ_list'),
     path('univ/<int:pk>', UniversityDetailView.as_view(), name='univ_detail'),
+
+    path('subway/', SubwayStationListView.as_view(), name='subway_list'),
+    path('subway/<int:pk>', SubwayStationDetailView.as_view(), name='subway_detail'),
 
 ]

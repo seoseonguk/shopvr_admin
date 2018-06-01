@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView
-from .models import Location, MarketingArea, University
+from .models import Location, MarketingArea, University, SubwayStation
 from .forms import LocationForm, MarketingAreaForm
 # Create your views here.
 
@@ -31,3 +31,12 @@ class UniversityListView(ListView):
 
 class UniversityDetailView(DetailView):
     model = University
+
+
+
+class SubwayStationListView(ListView):
+    model = SubwayStation
+
+
+class SubwayStationDetailView(DetailView):
+    model = SubwayStation
