@@ -130,7 +130,7 @@ class SCDailySalesListView(ListView):
         context = super().get_context_data()
         date = self.request.GET.get('datepickerforsales')
         try:
-            dt = datetime.datetime.strptime(date,'%D/%M/%Y')
+            dt = datetime.datetime.strptime(date,'%d/%m/%Y')
         except:
             dt = datetime.datetime.now()
         self.store = get_object_or_404(Store, slug='sc')
@@ -146,7 +146,7 @@ class BPDailySalesListView(ListView):
         context = super().get_context_data()
         date = self.request.GET.get('datepickerforsales')
         try:
-            dt = datetime.datetime.strptime(date,'%D/%M/%Y')
+            dt = datetime.datetime.strptime(date,'%d/%m/%Y')
         except:
             dt = datetime.datetime.now()
         self.store = get_object_or_404(Store, slug='bp')
