@@ -38,13 +38,10 @@ class DailySalesListView(ListView):
                 'Key': 'data/shopvr_'+q+'/'+q+'-'+ dt.strftime("%Y-%m")+'.csv'
             }
         )
-        print(dt)
         context['download_link'] = url
         context['dailysales_list'] = DailySales.objects.filter(store=self.store, date__month=dt.month, date__year=dt.year)
         context['aggregated_data'] = DailySales.objects.filter(store=self.store, date__month=dt.month, date__year=dt.year).aggregate(Sum('pos_cash_sales'),Sum('pos_card_sales'),Sum('kiosk_cash_sales'),Sum('kiosk_card_sales'),Sum('total_sales'))
 
-
-        print(context)
         return context
 
 
